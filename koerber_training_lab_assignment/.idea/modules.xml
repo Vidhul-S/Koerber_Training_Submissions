@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Koreber Training.iml" filepath="$PROJECT_DIR$/Koreber Training.iml" />
       <module fileurl="file://$PROJECT_DIR$/access/access.iml" filepath="$PROJECT_DIR$/access/access.iml" />
       <module fileurl="file://$PROJECT_DIR$/calculator/calculator.iml" filepath="$PROJECT_DIR$/calculator/calculator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/week2Day1LabAssignment.iml" filepath="$PROJECT_DIR$/week2Day1LabAssignment.iml" />
     </modules>
   </component>
 </project>
