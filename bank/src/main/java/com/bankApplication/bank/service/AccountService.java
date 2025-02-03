@@ -1,0 +1,47 @@
+package com.bankApplication.bank.service;
+
+import com.bankApplication.bank.dto.AccountBean;
+import com.bankApplication.bank.entites.Account;
+import com.bankApplication.bank.entites.Transaction;
+import com.bankApplication.bank.repo.AccountRepository;
+import com.bankApplication.bank.repo.TransactionRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class AccountService {
+
+    @Autowired
+    private AccountRepository accountRepository;
+
+    @Autowired
+    private TransactionRepository transactionRepository;
+
+    public void transfer(AccountBean accountBean) {
+        Account fromAccount = accountRepository.findById((long) accountBean.getFrom())
+                .orElseThrow(() -> new RuntimeException("Account not found"));
+        Account toAccount = accountRepository.findById((long) accountBean.getTo())
+                .orElseThrow(() -> new RuntimeException("Account not found"));
+
+        if (fromAccount.getBalance() < accountBean.getAmount()) {
+            throw new RuntimeException("Insufficient balance");
+        }
+
+
+        fromAccount.setBalance(fromAccount.getBalance() - accountBean.getAmount());
+
+        toAccount.setBalance(toAccount.getBalance() + accountBean.getAmount());
+
+
+        fromAccount.addTransaction(new Transaction(-accountBean.getAmount()));
+        toAccount.addTransaction(new Transaction(accountBean.getAmount()));
+
+        accountRepository.save(fromAccount);
+        accountRepository.save(toAccount);
+    }
+
+    public Account getAccount(int accountId) {
+        return accountRepository.findById((long) accountId)
+                .orElseThrow(() -> new RuntimeException("Account not found"));
+    }
+}

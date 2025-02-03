@@ -1,0 +1,8 @@
+package com.bankApplication.bank.repo;
+
+import com.bankApplication.bank.entites.Account;
+
+public interface AccountDao {
+    public void update(Account account);
+    public Account find(int id);
+}

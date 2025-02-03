@@ -1,0 +1,4 @@
+package com.bankApplication.bank.service;
+
+public interface AccountRepository extends JpaRepository<Account, Long> {
+}
