@@ -1,0 +1,5 @@
+2025-02-04 15:50:40.963 [main] INFO  com.book.util.MethodLogger - Method getAllBooks took 0 ms to execute.
+2025-02-04 15:50:40.975 [main] INFO  com.book.util.MethodLogger - Method addBook took 0 ms to execute.
+2025-02-04 15:50:40.975 [main] INFO  com.book.util.MethodLogger - Method getAllBooks took 0 ms to execute.
+2025-02-04 15:50:40.976 [main] INFO  com.book.util.MethodLogger - Method deleteBook took 0 ms to execute.
+2025-02-04 15:50:40.976 [main] INFO  com.book.util.MethodLogger - Method getAllBooks took 0 ms to execute.

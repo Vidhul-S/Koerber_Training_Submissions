@@ -11,10 +11,18 @@
 <!--    <bean id="bookDao" class="com.book.dao.BookDaoImpl"/>-->
 
 <!--    &lt;!&ndash; Define BookService and inject BookDao &ndash;&gt;-->
-<!--    <bean id="bookService" class="com.book.service.BookServiceImpl">-->
+<!--    <bean id="bookService" class="com.book.service.BookServiceHashMapImpl">-->
 <!--        <property name="dao" ref="bookDao"/>-->
 <!--    </bean>-->
 <!--        <context:component-scan base-package="com.book" />-->
-
+<!--    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">-->
+<!--        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>-->
+<!--        <property name="url" value="jdbc:mysql://localhost:3306/bookdb"/>-->
+<!--        <property name="username" value="root"/>-->
+<!--        <property name="password" value="password"/>-->
+<!--    </bean>-->
+<!--    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">-->
+<!--        <property name="dataSource" ref="dataSource"/>-->
+<!--    </bean>-->
 
 </beans>
