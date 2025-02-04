@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface AccountService {
     public List<AccountDto> getAllAccount();
-    public AccountDto getAccount(AccountDto accountDto);
+    public AccountDto getAccountById(int id);
     public String transfer(TransferDto transferDto);
     public String deposit(DepositDto depositDto);
     public String withdraw(WithdrawDto withdrawDto);

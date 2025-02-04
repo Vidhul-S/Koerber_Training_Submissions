@@ -9,6 +9,7 @@ import java.util.List;
 
 public class CustomerServiceImp implements CustomerService {
     private CustomerRepo customerRepo = new CustomerRepoJdbcImpl();
+
     @Override
     public List<Customer> findAll() {
         return customerRepo.findAll();
@@ -16,11 +17,11 @@ public class CustomerServiceImp implements CustomerService {
 
     @Override
     public Customer findById(int id) {
-        Customer customer=customerRepo.findById(id);
-        if (customer!=null){
+        Customer customer = customerRepo.findById(id);
+        if (customer != null) {
             return customer;
-        }else
-            throw new CustomerNotFoundException(" Cus with id "+ id +" is not found");
+        } else
+            throw new CustomerNotFoundException(" Cus with id " + id + " is not found");
     }
 
     @Override
@@ -35,6 +36,6 @@ public class CustomerServiceImp implements CustomerService {
 
     @Override
     public void update(int id, Customer customer) {
-        customerRepo.update(id,customer);
+        customerRepo.update(id, customer);
     }
 }

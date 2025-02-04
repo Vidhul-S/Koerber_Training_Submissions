@@ -1,0 +1,4 @@
+package com.bank.bankApp.exceptions;
+
+public class NoSufficientFundException {
+}
