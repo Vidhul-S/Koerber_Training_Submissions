@@ -19,7 +19,7 @@
 		<java.version>21</java.version>
 		<packaging>war</packaging>
 	</properties>
-
+	
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

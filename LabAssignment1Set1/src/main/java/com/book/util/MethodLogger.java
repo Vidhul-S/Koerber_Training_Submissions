@@ -17,7 +17,6 @@ public class MethodLogger {
     public Object around(ProceedingJoinPoint point) throws Throwable {
         MethodSignature signature = (MethodSignature) point.getSignature();
         String methodName = signature.getMethod().getName();
-        System.out.println("jdhbf");
         long start = System.currentTimeMillis();
 //        Thread.sleep(1000);
         Object result = point.proceed();

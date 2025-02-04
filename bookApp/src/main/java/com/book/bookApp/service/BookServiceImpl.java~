@@ -17,7 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 @Service
 @Transactional
-public class BookServiceImpl implements BookService  {
+public class BookServiceImpl implements BookService extends SpringBootServletInitializer {
 
     private final BookRepo bookRepo;
     @Scheduled(fixedRate = 60000)
