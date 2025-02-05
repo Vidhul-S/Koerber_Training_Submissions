@@ -1,0 +1,54 @@
+package com.productStore.products.controller;
+
+import com.productStore.products.entities.Product;
+import com.productStore.products.service.ProdServImpl;
+import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.math.BigDecimal;
+import java.util.List;
+@AllArgsConstructor
+@Controller
+public class ProdCont {
+    private final ProdServImpl prodServImpl;
+    @GetMapping("products")
+    public List<Product> getAllProducts() {
+        return prodServImpl.getListOfAllProducts();
+    }
+
+    @GetMapping("products/name=?1")
+    public List<Product> getAllProductsByName(String name) {
+        return prodServImpl.getAllProductBasedOnName(name);
+    }
+
+    @GetMapping("products/name=?1&price=?2")
+    public List<Product> getAllProductsByNameAndPrice(String name, BigDecimal price) {
+        return prodServImpl.getAllProductBasedOnNameAndPrice(name, price);
+    }
+
+    @GetMapping("products/name=?1|price=?2")
+    public List<Product> getAllProductsByNameOrPrice(String name, BigDecimal price) {
+        return prodServImpl.getAllProductBasedOnNameOrPrice(name, price);
+    }
+
+    // http://localhost:8081/productapp/productspage?offset=1&pageSize=4
+    @GetMapping(path = "productspage")
+    public Page<Product> getAllProductPage(@RequestParam(name="offset")  int offset,
+                                           @RequestParam(name = "pageSize")  int pageSize){
+        return prodServImpl.getAllProductPage(offset, pageSize);
+    }
+
+    //http://localhost:8081/productapp/productspage2?offset=1&pageSize=4&field=price
+    @GetMapping(path = "productspage2")
+    public Page<Product> getAllProductPage2(@RequestParam(name="offset")  int offset,
+                                            @RequestParam(name = "pageSize")  int pageSize,
+                                            @RequestParam(name = "field") String field){
+        return prodServImpl.getAllProductPageSorted(field, offset, pageSize);
+    }
+
+
+}

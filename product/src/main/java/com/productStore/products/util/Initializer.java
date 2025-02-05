@@ -1,0 +1,23 @@
+//package com.productStore.products.util;
+//
+//import com.productStore.products.entities.Product;
+//import com.productStore.products.repository.ProdRepo;
+//import lombok.AllArgsConstructor;
+//import org.springframework.boot.CommandLineRunner;
+//import org.springframework.stereotype.Component;
+//
+//import java.math.BigDecimal;
+//import java.time.LocalDate;
+//
+//@AllArgsConstructor
+//@Component
+//public class Initializer implements CommandLineRunner {
+//    private final ProdRepo prodRepo;
+//
+//    public void run(String... args) throws Exception {
+//
+//            prodRepo.save(new Product(null, "Laptop", new BigDecimal("1200.50"), LocalDate.of(2023, 5, 10)));
+//            prodRepo.save(new Product(null, "Phone", new BigDecimal("800.00"), LocalDate.of(2023, 6, 15)));
+//
+//        }
+//}

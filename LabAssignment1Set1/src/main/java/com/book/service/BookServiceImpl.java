@@ -14,7 +14,8 @@ import java.util.List;
 @AllArgsConstructor
 public class BookServiceImpl implements BookService {
 
-    private final BookDaoJdbcImpl dao;
+    private final BookDaoJdbcImpl dao; // this(final keyword) will force jdk to create the constructor
+                                       // and hence making it a constructor injected bean
 
     @Loggable
     @Override
