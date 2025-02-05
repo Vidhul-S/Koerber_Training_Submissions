@@ -2,8 +2,6 @@ spring.application.name=bookApp
 server.port=8090
 spring.jpa.show-sql=true
 spring.h2.console.enabled=true
-spring.profiles.active=dev
-
 
 management.endpoints.web.exposure.include= *
 management.endpoint.health.show-details=always

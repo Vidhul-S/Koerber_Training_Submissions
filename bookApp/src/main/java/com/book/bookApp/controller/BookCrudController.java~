@@ -81,7 +81,7 @@ public class BookCrudController {
     }
 
     //removeBook
-    @PutMapping("/removeBook")
+    @DeleteMapping("/removeBook")
     public ResponseEntity<String> removeBook(@Valid @RequestBody BookDto bookDto){
         try {
             String result = bookServiceImpl.removeBook(bookDto);
