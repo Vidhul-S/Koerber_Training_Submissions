@@ -32,5 +32,4 @@ public interface ProdRepo extends JpaRepository<Product, Integer> {
     List<Product> findByMfgDateAfter(LocalDate date);
     List<Product> findByMfgDateBefore(LocalDate date);
     List<Product> findByMfgDateBetween(LocalDate date1, LocalDate date);
-
 }
