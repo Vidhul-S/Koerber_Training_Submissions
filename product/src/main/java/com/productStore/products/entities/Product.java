@@ -30,4 +30,8 @@ public class Product {
         this.price = price;
         this.mfgDate = mfgDate;
     }
+    public Product(String name, BigDecimal price) {
+        this.name = name;
+        this.price = price;
+    }
 }

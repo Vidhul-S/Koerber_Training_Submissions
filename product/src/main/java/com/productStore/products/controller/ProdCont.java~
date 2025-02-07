@@ -36,19 +36,19 @@ public class ProdCont {
         return prodServImpl.getAllProductBasedOnNameOrPrice(name, price);
     }
 
-    // http://localhost:8081/products/page?offset=1&pageSize=4
+    // http://localhost:8081/products/page?offset=1&pageSize=1
     @GetMapping(path = "products/page")
-    public ResponseEntity<Page<Product>> getAllProductPage(@RequestParam(name="offset")  int offset,
+    public Page<Product> getAllProductPage(@RequestParam(name="offset")  int offset,
                                            @RequestParam(name = "pageSize")  int pageSize){
-        return ResponseEntity.ok(prodServImpl.getAllProductPage(offset, pageSize));
+        return prodServImpl.getAllProductPage(offset, pageSize);
     }
 
     //http://localhost:8081/products/page2?offset=1&pageSize=4&field=price
     @GetMapping(path = "products/page2")
-    public ResponseEntity<Page<Product>> getAllProductPage2(@RequestParam(name="offset")  int offset,
+    public Page<Product> getAllProductPage2(@RequestParam(name="offset")  int offset,
                                             @RequestParam(name = "pageSize")  int pageSize,
                                             @RequestParam(name = "field") String field){
-        return ResponseEntity.ok(prodServImpl.getAllProductPageSorted(field, offset, pageSize));
+        return prodServImpl.getAllProductPageSorted(field, offset, pageSize);
     }
 
 

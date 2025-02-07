@@ -4,7 +4,7 @@ import com.book.bookApp.exceptions.BookNotFoundException;
 import com.book.bookApp.service.BookServiceImpl;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import lombok.Value;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

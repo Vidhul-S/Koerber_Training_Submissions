@@ -8,6 +8,9 @@
 //
 //import java.math.BigDecimal;
 //import java.time.LocalDate;
+//import java.util.List;
+//import java.util.Random;
+//import java.util.stream.IntStream;
 //
 //@AllArgsConstructor
 //@Component
@@ -16,8 +19,12 @@
 //
 //    public void run(String... args) throws Exception {
 //
-//            prodRepo.save(new Product(null, "Laptop", new BigDecimal("1200.50"), LocalDate.of(2023, 5, 10)));
-//            prodRepo.save(new Product(null, "Phone", new BigDecimal("800.00"), LocalDate.of(2023, 6, 15)));
+//            List<Product> products= IntStream.rangeClosed(1, 4000)
+//					.mapToObj(i->
+//							new Product("product "+i, BigDecimal.valueOf(new Random().nextDouble(5000))))
+//					.toList();
+//
+//            prodRepo.saveAll(products);
 //
 //        }
 //}
