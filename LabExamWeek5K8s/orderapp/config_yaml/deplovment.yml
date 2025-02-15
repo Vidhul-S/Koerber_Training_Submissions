@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: orderapp-deploy
+  annotations:
+    kubernetes.io/change-cause: "deploying v2"
+spec:
+  selector:
+  spec:
+  minReadySeconds: 10
+  strategy:
+    type: RollingUpdate
+    matchLabels:
+      app:  orderapp-service
+  replicas: 4
+  template:
+    metadata:
+      labels:
+        app:  orderapp-service
+    spec:
+      containers:
+      - name:  ordwerapp-service
+        image: vidhuls/orderapp:1.4
+        imagePullPolicy: Always
+        ports:
+        - name: "app-port"
+          containerPort: 8081
+		
