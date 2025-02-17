@@ -1,0 +1,56 @@
+server:
+  port: 8765  # API Gateway Port
+
+spring:
+  application:
+    name: GATEWAY
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true  # Automatically map service names from Eureka
+      routes:  # Optional: Add custom routes
+        - id: CURRENCY-EXCHANGE
+          uri: lb://CURRENCY-EXCHANGE   #http://localhost:8080 # Load-balancing via Eureka
+          predicates:
+            - Path=/exchange/from/**  # Routes /exchange/** to currency-exchange-service
+          filters:
+            - RewritePath=/exchange/from/(?<segment>.*), /$\{segment}
+        - id: CURRENCY-CONVERT
+          uri: lb://CURRENCY-CONVERT  # Load-balancing via Eureka
+          predicates:
+            - Path=/convert/from/**  # Routes /exchange/** to currency-exchange-service
+          filters:
+            - RewritePath=/convert/from/(?<segment>.*), /$\{segment}
+  micrometer:
+    registry:
+      prometheus:
+        enabled: true
+
+eureka:
+  instance:
+    prefer-ip-address: true  # Use IP instead of hostname
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}  # Ensures a unique identifier
+  client:
+    register-with-eureka: true
+    force-fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/  # Ensure Eureka Server is running
+
+management:
+  tracing:
+    sampling:
+      probability: 1.0
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: always
+  metrics:
+    enabled: true
+
+logging:
+  level:
+    org.springframework.cloud: INFO
