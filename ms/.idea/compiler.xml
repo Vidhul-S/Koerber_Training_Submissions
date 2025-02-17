@@ -24,6 +24,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="configure_server" options="-parameters" />
       <module name="currencyConvert" options="-parameters" />
       <module name="currencyExchange" options="-parameters" />
       <module name="gateway" options="-parameters" />
