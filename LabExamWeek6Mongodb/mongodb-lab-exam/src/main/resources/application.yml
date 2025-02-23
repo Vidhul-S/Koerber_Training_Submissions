@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: JournalApp
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      auto-index-creation: true
+      # username: mongo
+      # password: root
+      database: myjournal
+      repositories:
+        enabled: true
+
+server:
+  port: 8990
+
+logging:
+  level:
+    org:
+      springframework:
+        data:
+          mongodb:
+            repository:
+              query: debug
+            core:
+              MongoTemplate: debug
