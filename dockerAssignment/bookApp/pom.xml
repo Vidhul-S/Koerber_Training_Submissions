@@ -8,18 +8,18 @@
 		<version>3.3.8</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<packaging>war</packaging>
-	<groupId>com.bankapp</groupId>
-	<artifactId>bankapp01</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>bankapp01</name>
+	<packaging>jar</packaging>
+	<groupId>com.bookApp</groupId>
+	<artifactId>bookApp</artifactId>
+	<version>1.0</version>
+	<name>bookApp</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
 		<java.version>21</java.version>
-		<packaging>war</packaging>
+		<packaging>jar</packaging>
 	</properties>
-	
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -63,13 +63,14 @@
 		</dependency>
 
 		<dependency>
+			<groupId>com.mysql</groupId>
+			<artifactId>mysql-connector-j</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+
+		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
 		</dependency>
 	</dependencies>
 
@@ -88,10 +89,13 @@
 				</configuration>
 			</plugin>
 			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
+				<groupId>com.google.cloud.tools</groupId>
+				<artifactId>jib-maven-plugin</artifactId>
+				<version>3.3.2</version>
 				<configuration>
-					<mainClass>com.book.bookApp.BookAppApplication</mainClass> <!-- Adjust to your main class -->
+					<to>
+						<image>vidhuls/bookapplication:1.2</image>
+					</to>
 				</configuration>
 			</plugin>
 		</plugins>

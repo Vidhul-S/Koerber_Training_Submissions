@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  currency-exchange:
+    image: currency-exchange
+    build:
+      context: ./currencyExchange
+    ports:
+      - "8000:8000"
+    networks:
+      - currency-network
+
+  currency-conversion:
+    image: currency-conversion
+    build:
+      context: ./currencyConvert
+    ports:
+      - "8100:8100"
+    networks:
+      - currency-network
+    environment:
+      - EXCHANGE_SERVICE_URL=http://currency-exchange:8000
+
+networks:
+  currency-network:
