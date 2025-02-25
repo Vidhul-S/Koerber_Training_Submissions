@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: bookapp-replicaset
+  labels:
+    app: bookapp
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: bookapp
+  template:
+    metadata:
+      labels:
+        app: bookapp
+    spec:
+      containers:
+        - name: bookapp-container
+          image: vidhuls/bookApp:latest
+          ports:
+            - containerPort: 8080

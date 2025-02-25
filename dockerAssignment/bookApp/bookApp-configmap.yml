@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: bookApp-config
+  namespace: qa
+data:
+  APP_ENV: "qa"
+  LOG_LEVEL: "INFO"
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: bookApp-config
+  namespace: dev
+data:
+  APP_ENV: "dev"
+  LOG_LEVEL: "DEBUG"

@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bookApp-deployment
+  labels:
+    app: bookApp
+  annotations:
+    kubernetes.io/change-cause: "version 4.0"
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: bookApp
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: bookApp
+    spec:
+      containers:
+        - name: bookApp-container
+          image: vidhuls/bookApp:v4
+          ports:
+            - containerPort: 8080

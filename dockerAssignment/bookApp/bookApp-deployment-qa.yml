@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bookApp-deployment
+  namespace: qa
+  labels:
+    app: bookApp
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: bookApp
+  template:
+    metadata:
+      labels:
+        app: bookApp
+    spec:
+      containers:
+        - name: bookApp-container
+          image: vidhuls/bookApp:latest
+          ports:
+            - containerPort: 8080
+          resources:
+            requests:
+              cpu: "200m"  # Minimum 0.2 CPU
+              memory: "256Mi"  # Minimum 256MB RAM
+            limits:
+              cpu: "500m"  # Max 0.5 CPU
+              memory: "512Mi"  # Max 512MB RAM
