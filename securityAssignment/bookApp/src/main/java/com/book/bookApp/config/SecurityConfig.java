@@ -1,34 +1,41 @@
 package com.book.bookApp.config;
 
-import com.book.bookApp.entities.User;
-import com.book.bookApp.repo.UserRepo;
+import com.book.bookApp.config.JwtFilterConfig;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import static org.springframework.security.config.Customizer.withDefaults;
+import java.util.Collections;
 
 @Configuration
-@EnableMethodSecurity
 public class SecurityConfig {
 
-    @Bean
-    public UserDetailsService userDetailsService(UserRepo userRepo) {
-        return username -> {
-            User user = userRepo.findByUsername(username)
-                    .orElseThrow(() -> new UsernameNotFoundException("User not found: " + username));
+    private final JwtFilterConfig jwtFilterConfig;
 
-            return org.springframework.security.core.userdetails.User
-                    .withUsername(user.getUsername())
-                    .password(user.getPassword())
-                    .roles(user.getRoles().toArray(new String[0]))
+    public SecurityConfig(JwtFilterConfig jwtFilterConfig) {
+        this.jwtFilterConfig = jwtFilterConfig;
+    }
+
+    @Bean
+    public UserDetailsService userDetailsService() {
+        return username -> {
+            // Dummy user, replace with DB lookup
+            UserDetails user = User.withUsername(username)
+                    .password(passwordEncoder().encode("password"))
+                    .roles("USER")
                     .build();
+            return user;
         };
     }
 
@@ -37,10 +44,11 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/auth/**").permitAll()
                         .anyRequest().authenticated()
                 )
-                .formLogin(withDefaults())
-                .httpBasic(withDefaults());
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .addFilterBefore(jwtFilterConfig, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
@@ -48,5 +56,10 @@ public class SecurityConfig {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
+        return authConfig.getAuthenticationManager();
     }
 }

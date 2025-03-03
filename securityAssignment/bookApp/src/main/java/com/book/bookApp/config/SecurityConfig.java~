@@ -1,7 +1,7 @@
 package com.book.bookApp.config;
 
 import com.book.bookApp.entities.User;
-import com.book.bookApp.repo.UserRepository;
+import com.book.bookApp.repo.UserRepo;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -19,9 +19,9 @@ import static org.springframework.security.config.Customizer.withDefaults;
 public class SecurityConfig {
 
     @Bean
-    public UserDetailsService userDetailsService(UserRepository userRepository) {
+    public UserDetailsService userDetailsService(UserRepo userRepo) {
         return username -> {
-            User user = userRepository.findByUsername(username)
+            User user = userRepo.findByUsername(username)
                     .orElseThrow(() -> new UsernameNotFoundException("User not found: " + username));
 
             return org.springframework.security.core.userdetails.User
